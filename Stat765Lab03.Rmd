@@ -1,6 +1,13 @@
 ---
 title: "Stat765Lab03"
-output: html_document
+author: "GuoXiaodoong"
+output: 
+  pdf_document:
+    latex_engine: xelatex
+  header-includes:
+    -\usepackage{amssymb}
+
+  html_document: default
 date: "2024-03-13"
 ---
 
@@ -11,6 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Task1:
 
 ```{r lab03Task1}
+library(sandwich)
 # Task 1
 set.seed(3047) # replace "765" with your student ID.
 n <- 200  
@@ -38,10 +46,11 @@ coef(fit)-1.96*sandwich_se
 coef(fit)+1.96*sandwich_se
 
 z_stat <- coef(fit)/sandwich_se
+z_stat
 
 p_value <- exp(-0.717*z_stat - 0.416*z_stat^2)
 
-
+p_value
 ```
 
 ## describe Task1:
