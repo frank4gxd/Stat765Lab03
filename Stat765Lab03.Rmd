@@ -1,0 +1,82 @@
+---
+title: "Stat765Lab03"
+output: html_document
+date: "2024-03-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Task1:
+
+```{r lab03Task1}
+# Task 1
+set.seed(3047) # replace "765" with your student ID.
+n <- 200  
+x <- rnorm(n)
+
+residual_std <- exp(x) # error standard deviation is exponential w.r.t. x values
+
+y <- 1.5+3*x + residual_std*rnorm(n)
+
+plot(x, y)
+
+#Task2
+fit <- lm(y~x)
+summary(fit)
+
+lines(x, (1.7607+3.4102*x), col = 'red')
+#Confident interval of the predictions
+confint(fit)
+
+sandwich_se = sqrt(diag(vcovHC(fit)))
+sandwich_se
+
+
+coef(fit)-1.96*sandwich_se
+coef(fit)+1.96*sandwich_se
+
+z_stat <- coef(fit)/sandwich_se
+
+p_value <- exp(-0.717*z_stat - 0.416*z_stat^2)
+
+
+```
+
+## describe Task1:
+
+according the plot, with the increasing of x, the y value will spared more from y=1.5+3*x
+
+## Task2:
+
+The standard error of X is  0.1604.
+
+The confident interval is  3.093955 3.726540
+
+The P-Value= <2e-16 *** tells us the significant of the coefficient . the smaller P Value,the more confident we have in the predictions we make with the line.
+
+##Task3:
+
+The Standard Error se(βi^) in SandWich estimator is 0.2448696
+
+the 95% confidence interval for coefficient of X is 2.930303 3.890192
+
+The P-Value is 4.188860e-40 
+
+
+##Task4:
+
+The confident interval is expended compared to original.
+
+The P-Value is smaller.That means we are more confident with our model.
+
+
+
+
+```{r Lab03Task2}
+
+
+
+
+```
